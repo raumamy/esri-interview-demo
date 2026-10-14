@@ -1,0 +1,12 @@
+{
+  "boundary_source": "User-supplied Natural Earth 1:50 million Ukraine, world-map-demo/public/data/ukraine.geojson",
+  "target_area_km2": 1000,
+  "spacing_m": 33980.88489694245,
+  "albers_definition": "+proj=aea +lon_0=31.5 +lat_1=45.5 +lat_2=51.5 +lat_0=48.5 +datum=WGS84 +units=m +x_0=0 +y_0=0 +no_defs",
+  "cells_per_dataset": 1200,
+  "reference_cell_id": 637,
+  "ground_area_km2": 999.9999999999984,
+  "measured_ground_min_km2": 1000.0000001889981,
+  "measured_ground_max_km2": 1000.0000001897497,
+  "method": "QGIS native Create grid, hexagon, spacing calculated for 1,000 km\u00b2 full cells, zero overlay; full bounding-extent tessellation in Ukraine Albers; no clipping; native edges densified to 250 m for export and WGS84 area verification"
+}

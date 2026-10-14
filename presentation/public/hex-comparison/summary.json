@@ -1,0 +1,11 @@
+{
+  "cells_per_dataset": 41,
+  "ground_area_km2": 1000,
+  "maximum_area_error_km2": 3.529294190229848e-09,
+  "albers_definition": "+proj=aea +lon_0=31.5 +lat_1=45.5 +lat_2=51.5 +lat_0=48.5 +datum=WGS84 +units=m +x_0=0 +y_0=0 +no_defs",
+  "display_crs": "Ukraine Albers equal-area conic",
+  "reference_cell_id": 20,
+  "reference_lon": 32.0,
+  "reference_lat": 49.0,
+  "method": "Matched isolated comparison cells; regular in respective native CRS; side lengths solved independently for 1,000 km\u00b2 WGS84 area; edges densified to 500 m; not a continuous tessellation"
+}

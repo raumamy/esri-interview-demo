@@ -1,0 +1,35 @@
+{
+  "qgis_version": "3.38.1-Grenoble",
+  "proj_string": "+proj=aea +lon_0=31.5 +lat_1=45.5 +lat_2=51.5 +lat_0=48.5 +datum=WGS84 +units=m +no_defs",
+  "study_extent": {
+    "west": 22,
+    "east": 41,
+    "south": 44,
+    "north": 53
+  },
+  "nominal_projected_area_km2": 1000,
+  "boundary_source": "geoBoundaries gbOpen UKR ADM0, represented year 2017; OSM/Wambacher; ODbL 1.0",
+  "method": "QGIS native:creategrid; full intersecting hexagons retained; interior cells used for statistics; densify edges to <=1 km before WGS84 ellipsoidal area measurement",
+  "grids": {
+    "mercator": {
+      "intersecting_cells": 1628,
+      "interior_cells": 1319,
+      "ground_min_km2": 376.40751370040704,
+      "ground_max_km2": 510.48592005153705,
+      "ground_mean_km2": 432.18481670111504,
+      "ground_spread_percent": 31.023395818149318,
+      "spacing_m": 33980.88489694154,
+      "planar_area_km2": 1000
+    },
+    "equal_area": {
+      "intersecting_cells": 735,
+      "interior_cells": 537,
+      "ground_min_km2": 1000.0000029520912,
+      "ground_max_km2": 1000.0000029565812,
+      "ground_mean_km2": 1000.0000029540106,
+      "ground_spread_percent": 4.4899479557141495e-10,
+      "spacing_m": 33980.88489694252,
+      "planar_area_km2": 1000
+    }
+  }
+}

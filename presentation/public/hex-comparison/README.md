@@ -1,0 +1,9 @@
+# Current Ukraine grid comparison
+
+The slides and UkraineHexMap use albers-grid.geojson, ukraine-boundary.geojson and grid-summary.json. The images are albers-grid.png and mercator-grid.png.
+
+Boundary: user-supplied Natural Earth 1:50 million Ukraine from world-map-demo/public/data/ukraine.geojson. The original is EPSG:3857; the browser export is EPSG:4326. This is a reference outline, not a territorial-control map.
+
+One continuous regular hex tessellation is constructed in Ukraine Albers equal area. Each full cell is 1,000 km², with horizontal/vertical spacing 33,980.88489694245 m and zero overlay. Full cells are retained across the bounding extent without clipping. Densified WGS84 ground-area measurements verify the target area. Both map views display the same cells.
+
+Regenerate using presentation/analysis/create_tessellation.py with the QGIS Python runtime, output directory and source boundary as arguments. Older isolated-cell comparison files in this directory are legacy artifacts and are not used by the current slides or component.

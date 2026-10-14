@@ -1,0 +1,12 @@
+{
+  "construction_crs": "Ukraine Albers equal area",
+  "ground_max_km2": 1000.0000029565812,
+  "one_grid": true,
+  "ground_min_km2": 1000.0000029520912,
+  "feature_count": 735,
+  "ground_area_km2": 1000,
+  "display_crs": [
+    "EPSG:3857",
+    "UKRAINE:AEA"
+  ]
+}

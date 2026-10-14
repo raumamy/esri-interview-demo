@@ -49,3 +49,7 @@
 .world-story-maps figcaption { font-size:16px; line-height:1.35; color:#5b7476; margin-top:5px; }
 .world-story-history { font-size:19px !important; line-height:1.45 !important; margin:12px 0 !important; }
 .world-story-takeaway { font-size:21px !important; line-height:1.35 !important; color:#205c60; margin-top:14px !important; }
+
+/* Keep the normal cursor instead of Slidev's glowing laser overlay. */
+.laser-pointer { display: none !important; }
+.slidev-self-laser-active .slidev-slide-container { cursor: auto !important; }

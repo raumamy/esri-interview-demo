@@ -205,19 +205,19 @@ async function loadProjection(projectionCode) {
 
   await Promise.all([
     loadFlatGeobuf(
-      import.meta.env.BASE_URL + 'data/ocean.fgb',
+      '/data/ocean.fgb',
       oceanSource,
       transformFn
     ),
 
     loadGraticule(
-      import.meta.env.BASE_URL + 'data/graticules.fgb',
+      '/data/graticules.fgb',
       graticuleSource,
       transformFn
     ),
 
     loadFlatGeobuf(
-      import.meta.env.BASE_URL + 'data/countries3.fgb',
+      '/data/countries3.fgb',
       countriesSource,
       transformFn
     ),

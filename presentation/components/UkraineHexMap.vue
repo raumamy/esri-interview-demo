@@ -10,6 +10,7 @@ import VectorLayer from 'ol/layer/Vector.js'
 import { Fill, Stroke, Style } from 'ol/style.js'
 import { register } from 'ol/proj/proj4.js'
 import proj4 from 'proj4'
+import { defaults as defaultControls } from 'ol/control/defaults.js'
 import 'ol/ol.css'
 
 const target = ref(null), display = ref('UKRAINE:ALBERS'), error = ref('')
@@ -33,7 +34,7 @@ function refresh() {
     })
     projected[display.value] = {
       grid: new VectorSource({ features, wrapX: false }),
-      boundary: new VectorSource({ features: format.readFeatures(rawBoundary, options), wrapX: false }),
+      boundary: new VectorSource({ features: format.readFeatures(rawBoundary, options), wrapX: false, attributions: 'Natural Earth · 1:50m' }),
     }
   }
   source = projected[display.value].grid; boundary = projected[display.value].boundary
@@ -61,11 +62,11 @@ onMounted(async () => {
     const gridResponse = await fetch(import.meta.env.BASE_URL + 'hex-comparison/albers-grid.fgb')
     if (!gridResponse.ok) throw new Error('Could not load the FlatGeobuf grid')
     for await (const feature of deserialize(gridResponse.body)) gridFeatures.push(feature)
-    source = new VectorSource({ wrapX: false }); boundary = new VectorSource({ wrapX: false })
+    source = new VectorSource({ wrapX: false }); boundary = new VectorSource({ wrapX: false, attributions: 'Natural Earth · 1:50m' })
     const cells = new VectorLayer({ source, style: new Style({ fill: new Fill({ color: '#c5dbd8' }), stroke: new Stroke({ color: '#7ea5a5', width: 0.6 }) }) })
     const outline = new VectorLayer({ source: boundary, style: new Style({ stroke: new Stroke({ color: '#18373b', width: 2 }) }) })
     await nextTick()
-    map = new Map({ target: target.value, layers: [cells,outline], controls: [], view: new View({ projection: 'UKRAINE:ALBERS', center: [0,0], zoom: 1 }) })
+    map = new Map({ target: target.value, layers: [cells,outline], controls: defaultControls({ rotate: false }), view: new View({ projection: 'UKRAINE:ALBERS', center: [0,0], zoom: 1 }) })
     refresh()
     resizeObserver = new ResizeObserver(fitMap)
     resizeObserver.observe(target.value)

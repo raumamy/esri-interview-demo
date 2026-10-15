@@ -19,7 +19,7 @@ mdc: true
 
 Choosing projections, data formats and development libraries<br> for thematic web maps
 
-<div class="eyebrow">Amy Raum <br> Digital Cartographer</div>
+<div class="eyebrow">Amy Raum</div>
 
 <!--
 0:00–0:30 | Opening
@@ -34,7 +34,7 @@ Choosing projections, data formats and development libraries<br> for thematic we
 Quick review and tools
 
 ## Data
-Cartographic control = Vector, file type options
+Vector geometry and web formats
 
 ## Two Case Studies
 A world map and Ukraine
@@ -156,7 +156,7 @@ Image: existing saved Projection Wizard screenshot, public/ukraine/projection-wi
 
 - Projection algorithms transform the coordinates
 - The renderer draws the geometry in the chosen map view
-- Feature attributes connected to the geometry
+- Feature attributes stay connected to the geometry
 
 <div class="rule"></div>
 
@@ -181,7 +181,7 @@ Implementation: public/world/countries.fgb and components/UkraineHexMap.vue.
 | **FlatGeobuf** | Binary features with optional spatial indexing |
 | **Vector tiles** | Deliver geometry in tiles for the current view and zoom |
 
-**Data and size requirements dictate the filetype. The map client supports projection.**
+**Choose the format for the data size and delivery needs. Check projection support in the map library.**
 
 <!--
 4:20–5:05 | Vector formats for the web
@@ -199,7 +199,7 @@ Project evidence: analysis/ukraine-tessellation.gpkg, public/world/countries.fgb
 
 # Why OpenLayers or D3?
 
-<p class="lead">Two javascript libraries to bring vector maps into the browser.</p>
+<p class="lead">Two JavaScript libraries to bring vector maps into the browser.</p>
 
 ## OpenLayers
 Full mapping library: layers, navigation and feature interaction, with flexible projection support.
@@ -213,7 +213,7 @@ Data visualization library: geographic projections and SVG graphics.
 5:05–5:45 | Why OpenLayers or D3?
 Both OpenLayers and D3 can bring vector maps into the browser, but they offer different starting points. OpenLayers is a robust JavaScript mapping library. It provides map layers, navigation and feature interaction, with flexible projection support. It fits the interactive map experience I wanted for the world demo.
 D3 is a broader data visualization library with geographic projection tools. It gives me control over SVG paths, symbols and labels for a custom thematic graphic. It can also support interaction, but I would assemble more of the mapping behavior myself.
-I would choose between them based on the reader's experience and the deliverable. OpenLayers fits a map people explore; D3 fits a bespoke graphic integrated with an article or visualization. The appendix shows the same country data rendered with D3.
+I would choose between them based on the reader's experience and the deliverable. OpenLayers fits a map people explore; D3 fits a bespoke graphic integrated with an article or visualization. For this presentation, the working maps use OpenLayers. D3 is an alternative when the deliverable calls for a custom SVG graphic.
 Sources: https://openlayers.org/doc/faq.html
 https://d3js.org/
 https://d3js.org/d3-geo
@@ -221,7 +221,7 @@ https://d3js.org/d3-geo
 
 ---
 
-# An world map template for intel stories
+# A world map for intelligence stories
 
 <p class="lead">An inline thematic map: a worldwide overview, with country-level detail when readers need it.</p>
 
@@ -236,7 +236,7 @@ https://d3js.org/d3-geo
 5:45–6:25 | A world map within the story
 My work supports thematic storytelling in a classified environment. Here I am using public data to illustrate the design and technology choices, rather than showing an operational product.
 Imagine this map embedded in an article about a resource or policy. A choropleth gives readers the worldwide pattern; country selection could offer values, context and sources for a deeper look. The example is conceptual: the current world demo shows projection switching, not a completed choropleth or country-detail article.
-Equal Earth gives readers another depiction of the Earth while supporting the office's cartographic standards. Projection is one part of the visual design and user experience, alongside data classification, symbols, labels and interaction. Those requirements influence our technology choice.
+Equal Earth gives readers another depiction of the Earth while supporting the office's cartographic standards. Projection is one part of the visual design and user experience, alongside data classification, symbols, labels and interaction. I needed a library that could display those projections and support country selection.
 I can describe the process and my contribution to making evidence understandable; I am not claiming access to downstream customer decisions. The public demonstrations that follow isolate individual parts of that workflow.
 -->
 
@@ -251,7 +251,7 @@ class: demo-slide
 <!--
 6:25–7:25 | The existing world demo
 This is the demo I built using OpenLayers and the proj4 JavaScript library. All country features come from the same EPSG:4326 FlatGeobuf. OpenLayers displays the transformed features and handles pan and zoom. proj4js provides the additional coordinate transformation. Toggle once to Web Mercator and back; point briefly to Greenland and Africa. Move into the implementation, rather than spending the whole talk on projection theory.
-The original demo source is unchanged. It reloads each FlatGeobuf and transforms fresh geometry when the projection changes. Its spherical Equal Earth definition is registered under EPSG:8857; describe it as this demo's implementation, not proof of an authoritative ellipsoidal pipeline. The demo uses independent starting zooms, not calibrated equal-scale views. If it fails, use the saved world comparison in the appendix.
+The original demo source is unchanged. It reloads each FlatGeobuf and transforms fresh geometry when the projection changes. Its spherical Equal Earth definition is registered under EPSG:8857; describe it as this demo's implementation, not proof of an authoritative ellipsoidal pipeline. The demo uses independent starting zooms, not calibrated equal-scale views. Keep the local version available as a backup for the live demonstration.
 Sources: ../world-map-demo/src/main.js and src/projection.js
 https://openlayers.org/doc/faq.html
 -->
@@ -283,18 +283,18 @@ https://github.com/proj4js/proj4js
 
 # Ukraine: change over time
 
-<p class="lead">Hexbins provided a consistent spatial framework for evaluating change over time.</p>
+<p class="lead">We used hexagons to compare where change occurred and how quickly.</p>
 
 - The published work examined the pacing of change
-- Repeated spatial units supported comparison across time
+- Using the same grid let us compare change over time
 
 
 
 <!--
 8:05–9:20 | Ukraine: change over time
-A published Ukraine piece gives another example of how the story shapes the map. We chose hex bins to evaluate change over time and communicate its pacing. I can speak to the stalemate narrative from that work. The grid demonstration that follows illustrates the spatial framework behind that kind of comparison.
-Describe the published work's actual timeframe and findings in your own words. Explain what changed over the period and how its pacing contributed to the narrative. Do not imply that the demonstration contains the published observations or proves a stalemate.
-Context: presenter describes a published work elsewhere. No conflict observations, territorial-control time series, or published article have been supplied with this deck. The statement about the choice of hex bins comes from the presenter's account.
+In the published Ukraine work, we used hex bins to compare change over time. Using the same cells made it easier to see where change happened and how quickly. That pacing was relevant to the stalemate narrative. Here I am demonstrating the grid construction and projection choices behind that approach.
+The cartographic choice was to use hex bins for comparing change over time. The public demo here shows the grid and projection choices; it does not contain the published observations.
+The published example and this demonstration serve different purposes: the published work examined the pacing of change, while this demo explains how the spatial units are constructed and displayed.
 -->
 
 ---
@@ -304,8 +304,8 @@ Context: presenter describes a published work elsewhere. No conflict observation
 <p class="lead">Consistent cell areas make spatial comparisons meaningful.</p>
 
 - Equal-area construction gives the cells a consistent ground area
-- A stable grid provides the spatial framework for comparing time periods
-- Display choices shape the reader's experience
+- Use the same cells to compare different time periods
+- Let readers explore the map and switch projections
 
 <div style="display:flex;align-items:center;gap:18px;margin-top:26px" role="img" aria-label="Legend: one hexagon represents 1000 square kilometers">
 <svg width="74" height="66" viewBox="0 0 74 66" aria-hidden="true" style="flex:none"><polygon points="19,3 55,3 72,33 55,63 19,63 2,33" fill="#70a6ad" stroke="#18373b" stroke-width="2" /></svg>
@@ -314,9 +314,9 @@ Context: presenter describes a published work elsewhere. No conflict observation
 <!--
 9:20–10:00 | Equal areas support comparison
 Each full cell in the demonstration represents 1,000 km², constructed in the Albers equal-area CRS and checked with WGS84 measurements.
-Projection was a smaller consideration within that project, but it mattered to the hexagons. We needed cells that consistently represented equal ground areas. That gives the comparison a stable spatial basis as we evaluate change over time. We also wanted readers to explore the map smoothly.
+Projection was a smaller consideration within that project, but it mattered to the hexagons. We needed cells that consistently represented equal ground areas. Each cell covers the same ground area, so changing the map view does not change the unit we are comparing. We also wanted readers to explore the map smoothly.
 Equal areas address the spatial basis of comparison. Comparing time periods also requires consistent definitions and comparable temporal coverage. The bundled demonstration isolates grid construction and display. It does not aggregate observations or perform temporal analysis.
-The next slide uses the existing QGIS renders of one continuous Albers tessellation. Both images display the same geometry and saved ground-area attributes.
+Next I will explain how I built the grid in QGIS, then show the same cells in two map projections.
 -->
 
 ---
@@ -332,7 +332,7 @@ The next slide uses the existing QGIS renders of one continuous Albers tessellat
 **Alternatively, in D3:** set the geographic projection used to draw the SVG map.
 
 <!--
-10:45–11:25 | Create the equal-area tessellation in QGIS
+10:00–10:40 | Create the equal-area tessellation in QGIS
 For browser delivery, register the custom CRS with the proj4 library and OpenLayers again, then set the map view to that projection. Alternatively, configure the corresponding geographic projection in D3 and use it to generate the SVG paths. D3 uses its own projection API rather than the OpenLayers registration workflow.
 The bundled grid is generated by the native QGIS Create grid algorithm. All full native cells have equal planar area in an ellipsoidal equal-area CRS, corresponding to equal ground area. Densified edges preserve the native cell boundaries when exporting to geographic GeoJSON. QGIS WGS84 measurements verify the areas numerically. Do not clip the polygons in this demonstration; retain complete cells across the study extent.
 -->
@@ -341,13 +341,13 @@ The bundled grid is generated by the native QGIS Create grid algorithm. All full
 class: demo-slide
 ---
 
-# D3 Demo
+# Ukraine Grid Demo
 
 <UkraineHexMap />
 
 <!--
-12:00–12:45 | One grid, two map projections
-Begin in Ukraine Albers: the hexagons form a continuous regular tessellation. Switch Map projection to Web Mercator. The entire outline and the same cells transform together. Their ground areas remain equal; their displayed sizes and shapes change. Click any cell to inspect its saved WGS84 area. Show matched cell zooms into the same reference cell. This is the grid construction and display workflow confirmed in QGIS, with no observations or binning.
+10:40–11:25 | Ukraine grid demo
+Begin in Ukraine Albers: the hexagons form a continuous regular tessellation. Switch Map projection to Web Mercator. The entire outline and the same cells transform together. Their ground areas remain equal; their displayed sizes and shapes change. Point out that the same cells are being redrawn; each full cell still represents 1,000 km². This is the grid construction and display workflow confirmed in QGIS, with no observations or binning.
 -->
 
 ---
@@ -364,7 +364,7 @@ Check the geometry, attributes and delivery format.
 Confirm the projections and interactions the tools support.
 
 <!--
-12:45–13:20 | Wrap-up
+11:25–12:00 | Wrap-up
 The choices work together. Consider which projection supports the story and what distortions it introduces. Check the data: its geometry, attributes, coordinate reference system and delivery format. Then confirm that the library supports the projections and interactions the reader needs.
 The world map and Ukraine grid show why these decisions matter together: the same features can have different depictions, while the underlying data and verified ground areas remain consistent. Thank you.
 -->

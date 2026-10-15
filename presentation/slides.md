@@ -333,7 +333,7 @@ Begin in Ukraine Albers: the hexagons form a continuous regular tessellation. Sw
 
 ---
 
-# Projection, data and library limits
+# Web maps: projection, data and libraries
 
 ## Projection
 Choose what to preserve for the region and the story.
@@ -341,8 +341,8 @@ Choose what to preserve for the region and the story.
 ## Data
 Check the geometry, attributes and delivery format.
 
-## Library limits
-Confirm the projections and interactions the tools support.
+## Libraries
+Confirm the reprojection capabilities and interactions the tools support.
 
 <!--
 11:25–12:00 | Wrap-up

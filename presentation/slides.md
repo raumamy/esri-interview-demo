@@ -281,12 +281,13 @@ https://github.com/proj4js/proj4js
 
 ---
 
-# Ukraine: change over time
+# Ukraine: Change over time
 
 <p class="lead">We used hexagons to compare where change occurred and how quickly.</p>
 
 - The published work examined the pacing of change
 - Using the same grid let us compare change over time
+- Equal-area construction gives the cells a consistent ground area
 
 
 
@@ -299,27 +300,7 @@ The published example and this demonstration serve different purposes: the publi
 
 ---
 
-# Equal areas support comparison
 
-<p class="lead">Consistent cell areas make spatial comparisons meaningful.</p>
-
-- Equal-area construction gives the cells a consistent ground area
-- Use the same cells to compare different time periods
-- Let readers explore the map and switch projections
-
-<div style="display:flex;align-items:center;gap:18px;margin-top:26px" role="img" aria-label="Legend: one hexagon represents 1000 square kilometers">
-<svg width="74" height="66" viewBox="0 0 74 66" aria-hidden="true" style="flex:none"><polygon points="19,3 55,3 72,33 55,63 19,63 2,33" fill="#70a6ad" stroke="#18373b" stroke-width="2" /></svg>
-<div><strong style="font-size:26px">1 hexagon = 1,000 km²</strong><div class="small">Equal ground area per full cell</div></div>
-</div>
-<!--
-9:20–10:00 | Equal areas support comparison
-Each full cell in the demonstration represents 1,000 km², constructed in the Albers equal-area CRS and checked with WGS84 measurements.
-Projection was a smaller consideration within that project, but it mattered to the hexagons. We needed cells that consistently represented equal ground areas. Each cell covers the same ground area, so changing the map view does not change the unit we are comparing. We also wanted readers to explore the map smoothly.
-Equal areas address the spatial basis of comparison. Comparing time periods also requires consistent definitions and comparable temporal coverage. The bundled demonstration isolates grid construction and display. It does not aggregate observations or perform temporal analysis.
-Next I will explain how I built the grid in QGIS, then show the same cells in two map projections.
--->
-
----
 
 # Create the equal-area tessellation in QGIS
 

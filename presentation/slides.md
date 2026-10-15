@@ -187,12 +187,12 @@ Implementation: public/world/countries.fgb and components/UkraineHexMap.vue.
 4:20–5:05 | Vector formats for the web
 There are several ways to package vector geometry. GeoJSON is readable and widely supported. TopoJSON encodes topology, so adjacent polygons can share boundary arcs instead of repeating them. FlatGeobuf is a binary feature format that supports streaming and optional spatial indexing. Vector tiles divide geometry into tiles for delivery at different zoom levels; they are a delivery approach with formats such as Mapbox Vector Tiles.
 These choices do not automatically provide arbitrary reprojection. The renderer, coordinate reference system and delivery scheme still have to work together. Vector tiles may be clipped, simplified and tied to a particular tile grid, so they are not interchangeable with full source features for every task.
-In this project, FlatGeobuf delivers the world features and GeoJSON delivers the Ukraine grid. The world demo loads the whole collection rather than using an extent query. TopoJSON and vector tiles are alternatives discussed here, not formats implemented in these demos. GeoPackage remains the desktop container for building and checking the Ukraine grid.
+In this project, FlatGeobuf delivers the world features and FlatGeobuf delivers the Ukraine grid. The world demo loads the whole collection rather than using an extent query. TopoJSON and vector tiles are alternatives discussed here, not formats implemented in these demos. GeoPackage remains the desktop container for building and checking the Ukraine grid.
 Sources: https://geojson.org/
 https://github.com/topojson/topojson-specification
 https://flatgeobuf.org/
 https://mapbox.github.io/vector-tile-spec/
-Project evidence: analysis/ukraine-tessellation.gpkg, public/world/countries.fgb, components/UkraineHexMap.vue.
+Project evidence: analysis/ukraine-tessellation.gpkg, public/world/countries.fgb, public/hex-comparison/albers-grid.fgb, components/UkraineHexMap.vue.
 -->
 
 ---

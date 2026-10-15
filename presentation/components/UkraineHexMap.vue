@@ -4,6 +4,7 @@ import { useIsSlideActive } from '@slidev/client'
 import Map from 'ol/Map.js'
 import View from 'ol/View.js'
 import GeoJSON from 'ol/format/GeoJSON.js'
+import { deserialize } from 'flatgeobuf/lib/mjs/ol.js'
 import VectorSource from 'ol/source/Vector.js'
 import VectorLayer from 'ol/layer/Vector.js'
 import { Fill, Stroke, Style } from 'ol/style.js'
@@ -13,7 +14,8 @@ import 'ol/ol.css'
 
 const target = ref(null), display = ref('UKRAINE:ALBERS'), error = ref('')
 const active = useIsSlideActive()
-let map, source, boundary, rawGrid, rawBoundary, resizeObserver
+let map, source, boundary, rawBoundary, resizeObserver
+const gridFeatures = [], projected = {}
 function fitMap() {
   if (!map || !target.value?.clientWidth || !target.value?.clientHeight) return
   map.updateSize()
@@ -23,8 +25,20 @@ function refresh() {
   if (!map) return
   const format = new GeoJSON()
   const options = { dataProjection: 'EPSG:4326', featureProjection: display.value }
-  source.clear(); source.addFeatures(format.readFeatures(rawGrid, options))
-  boundary.clear(); boundary.addFeatures(format.readFeatures(rawBoundary, options))
+  if (!projected[display.value]) {
+    const features = gridFeatures.map(feature => {
+      const copy = feature.clone()
+      copy.getGeometry().transform('EPSG:4326', display.value)
+      return copy
+    })
+    projected[display.value] = {
+      grid: new VectorSource({ features, wrapX: false }),
+      boundary: new VectorSource({ features: format.readFeatures(rawBoundary, options), wrapX: false }),
+    }
+  }
+  source = projected[display.value].grid; boundary = projected[display.value].boundary
+  map.getLayers().item(0).setSource(source)
+  map.getLayers().item(1).setSource(boundary)
   map.setView(new View({ projection: display.value, center: [0,0], zoom: 1 }))
   fitMap()
 }
@@ -37,13 +51,16 @@ watch(active, async value => {
 })
 onMounted(async () => {
   try {
-    const result = await Promise.all(['grid-summary.json','ukraine-boundary.geojson','albers-grid.geojson'].map(async f => {
+    const result = await Promise.all(['grid-summary.json','ukraine-boundary.geojson'].map(async f => {
       const response = await fetch(import.meta.env.BASE_URL + 'hex-comparison/' + f)
       if (!response.ok) throw new Error('Could not load ' + f)
       return response.json()
     }))
     proj4.defs('UKRAINE:ALBERS', result[0].albers_definition); register(proj4)
-    rawBoundary = result[1]; rawGrid = result[2]
+    rawBoundary = result[1]
+    const gridResponse = await fetch(import.meta.env.BASE_URL + 'hex-comparison/albers-grid.fgb')
+    if (!gridResponse.ok) throw new Error('Could not load the FlatGeobuf grid')
+    for await (const feature of deserialize(gridResponse.body)) gridFeatures.push(feature)
     source = new VectorSource({ wrapX: false }); boundary = new VectorSource({ wrapX: false })
     const cells = new VectorLayer({ source, style: new Style({ fill: new Fill({ color: '#c5dbd8' }), stroke: new Stroke({ color: '#7ea5a5', width: 0.6 }) }) })
     const outline = new VectorLayer({ source: boundary, style: new Style({ stroke: new Stroke({ color: '#18373b', width: 2 }) }) })
